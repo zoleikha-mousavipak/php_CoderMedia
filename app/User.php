@@ -38,6 +38,18 @@ class User extends Authenticatable
     ];
 
 
+    // overriding: during create user, create profile with default title
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($user) {
+            $user->profile()->create([
+                'title' => $user->username,
+            ]);
+        });
+    }
+
     public function posts()
     {
 
