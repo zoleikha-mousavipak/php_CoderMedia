@@ -22,7 +22,9 @@ class ProfilesController extends Controller
     // same above
     public function index(User $user)
     {
-        return view('profiles.index', compact('user'));
+        $follows = (auth()->user() ? auth()->user()->following->contains($user->id) : false);
+
+        return view('profiles.index', compact('user', 'follows'));
     }
 
     public function edit(User $user)
@@ -49,13 +51,12 @@ class ProfilesController extends Controller
             // manipulate image
             $image = Image::make(\public_path("storage/{$imagepath}"))->fit(1000, 1000);
             $image->save();
-
-
+            $imageArray = ['image' => $imagepath];
         }
-   
+
         auth()->user()->profile()->update(array_merge(
             $data,
-            ['image' => $imagepath]
+            $imageArray ?? []
         ));
 
 

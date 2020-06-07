@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::post('/follow/{user}', function () {
+//     return ['success'];
+// });
+
+Route::post('/follow/{user}', 'FollowsController@store');
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -28,3 +34,11 @@ Route::get('/p/{post}', 'PostController@show');
 Route::get('/profile/{user}', 'ProfilesController@index')->name('profile.show');
 Route::get('/profile/{user}/edit', 'ProfilesController@edit')->name('profile.edit');
 Route::patch('/profile/{user}', 'ProfilesController@update')->name('profile.update');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
