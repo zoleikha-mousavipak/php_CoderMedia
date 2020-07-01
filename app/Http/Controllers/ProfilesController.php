@@ -12,6 +12,7 @@ use Intervention\Image\Facades\Image;
 class ProfilesController extends Controller
 {
 
+
     //    public function index($user)
     // {
     //        $user = \App\User::findOrFail($user);
